@@ -11,10 +11,17 @@ const publicDirPath = path.join(__dirname, '../public')
 
 app.use(express.static(publicDirPath))
 
-let count = 0
 io.on('connection', (socket) => {
     console.log('New Web Socket Connection')
 
+    socket.emit('message', 'Welcome!')
+
+    socket.on('sendMessage', (msg) => {
+        io.emit('message', msg)
+    })
+
+    /*
+    let count = 0
     socket.emit('countUpdated', count)
     
     socket.on('increment', () => {
@@ -25,6 +32,7 @@ io.on('connection', (socket) => {
         // io.emit works for all connections
         io.emit('countUpdated', count)
     })
+    */
 })
 
 server.listen(3000, () => {

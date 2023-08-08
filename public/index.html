@@ -4,7 +4,10 @@
     </head>
     <body>
         <p>Chat Room Application</p>
-        <button id="incrementCount">+1</button>
+        <form id="msgForm">
+            <input placeholder="Message" name="msgContent">
+            <button id="sendButton">Send</button>
+        </form>
         <script src="/socket.io/socket.io.js"></script>
         <script src="/js/chat.js"></script>
     </body>
