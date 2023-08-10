@@ -17,8 +17,14 @@ io.on('connection', (socket) => {
     socket.emit('message', 'Welcome!')
     socket.broadcast.emit('message', 'A new user has joined!')
 
+    // Sending Message
     socket.on('sendMessage', (msg) => {
         io.emit('message', msg)
+    })
+
+    // Sharing Location
+    socket.on('sendLocation', (location) => {
+        socket.broadcast.emit('message', `http://google.com/maps?q=${location.latitude},${location.longitude}`)
     })
 
     // Disconnecting Event
