@@ -1,4 +1,4 @@
-socket = io()
+const socket = io()
 
 socket.on('message', (msg) => {
     console.log(msg)
@@ -10,7 +10,9 @@ document.querySelector('#msgForm').addEventListener('submit', (e) => {
 
     // Getting message from html form
     const msg = e.target.elements.msgContent
-    socket.emit('sendMessage', msg)
+    socket.emit('sendMessage', msg, (message) => {
+        console.log(message)
+    })
 })
 
 document.querySelector('#sendLocation').addEventListener('click', () => {

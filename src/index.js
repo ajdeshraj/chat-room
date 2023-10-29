@@ -18,8 +18,9 @@ io.on('connection', (socket) => {
     socket.broadcast.emit('message', 'A new user has joined!')
 
     // Sending Message
-    socket.on('sendMessage', (msg) => {
+    socket.on('sendMessage', (msg, callback) => {
         io.emit('message', msg)
+        callback('Delivered!')
     })
 
     // Sharing Location
