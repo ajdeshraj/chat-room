@@ -2,6 +2,7 @@ const path = require('path')
 const http = require('http')
 const express = require('express')
 const socketio = require('socket.io')
+const Filter = require('bad-words')
 
 const app = express()
 const server = http.createServer(app)
@@ -19,33 +20,25 @@ io.on('connection', (socket) => {
 
     // Sending Message
     socket.on('sendMessage', (msg, callback) => {
+        const filter = new Filter()
+        if (filter.isProfane(msg)) {
+            return callback('Profanity is not Allowed!')
+        }
+
         io.emit('message', msg)
         callback('Delivered!')
     })
 
     // Sharing Location
-    socket.on('sendLocation', (location) => {
-        socket.broadcast.emit('message', `http://google.com/maps?q=${location.latitude},${location.longitude}`)
+    socket.on('sendLocation', (location, callback) => {
+        socket.broadcast.emit('locationMsg', `http://google.com/maps?q=${location.latitude},${location.longitude}`)
+        callback()
     })
 
     // Disconnecting Event
     socket.on('disconnect', () => {
         io.emit('message', 'A user has left!')
     })
-
-    /*
-    let count = 0
-    socket.emit('countUpdated', count)
-    
-    socket.on('increment', () => {
-        count++
-        // emit only works for that particular connection
-        // socket.emit('countUpdated', count)
-
-        // io.emit works for all connections
-        io.emit('countUpdated', count)
-    })
-    */
 })
 
 server.listen(3000, () => {
