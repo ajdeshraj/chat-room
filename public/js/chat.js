@@ -14,15 +14,17 @@ const locationMsgTemplate = document.querySelector('#locationMsgTemplate').inner
 socket.on('message', (msg) => {
     console.log(msg)
     const html = Mustache.render(msgTemplate, {
-        message: msg
+        message: msg.text,
+        createdAt: moment(msg.createdAt).format('h:mm a')
     })
     $messages.insertAdjacentHTML('beforeend', html)
 })
 
-socket.on('locationMsg', (url) => {
-    console.log(url)
+socket.on('locationMsg', (msg) => {
+    console.log(msg)
     const html = Mustache.render(locationMsgTemplate, {
-        url
+        url: msg.url,
+        createdAt: moment(msg.createdAt).format('h:mm a')
     })
     $messages.insertAdjacentHTML('beforeend', html)
 })
@@ -70,13 +72,3 @@ document.querySelector('#sendLocation').addEventListener('click', () => {
         })
     })
 })
-/*
-socket.on('countUpdated', (count) => {
-    console.log('The count has been updated', count)
-})
-
-document.querySelector('#incrementCount').addEventListener('click', () => {
-    console.log('Clicked')
-    socket.emit('increment')
-})
-*/
