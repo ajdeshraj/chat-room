@@ -1,28 +1,42 @@
 <html>
     <head>
         <title>Chat Room</title>
+        <link rel="icon" href="./img/favicon.png">
+        <link rel="stylesheet" href="./css/styles.min.css">
     </head>
     <body>
-        <p>Chat Room Application</p>
+        <div class="chat">
+            <div class="chat__sidebar"></div>
+            <div class="chat__main">
+                <div id="messages" class="chat__messages"></div>
 
-        <div id="messages">
+                <div class="compose">
+                    <form id="msgForm">
+                        <input placeholder="Message" name="msgContent">
+                        <button id="sendButton">Send</button>
+                    </form>
+                    <button id="sendLocation">Share Location</button>
+                </div>
+
+            </div>
         </div>
 
-        <form id="msgForm">
-            <input placeholder="Message" name="msgContent">
-            <button id="sendButton">Send</button>
-        </form>
-        <button id="sendLocation">Share Location</button>
-
         <script id="msgTemplate" type="text/html">
-            <div>
-                <p>{{createdAt}} - {{message}}</p>
+            <div class="message">
+                <p>
+                    <span class="message__name">Some User Name</span>
+                    <span class="message__meta">{{createdAt}}</span>
+                <p>{{message}}</p>
             </div>
         </script>
 
         <script id="locationMsgTemplate" type="text/html">
-            <div>
-                <p>{{createdAt}} - <a href="{{}}" target="_blank">My Location</a></p>
+            <div class="message">
+                <p>
+                    <span class="message__name">Some User Name</span>
+                    <span class="message__meta">{{createdAt}}</span>
+                </p>
+                <p><a href="{{}}" target="_blank">My Location</a></p>
             </div>
         </script>
 
