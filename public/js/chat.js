@@ -11,7 +11,7 @@ const $messages = document.querySelector('#messages')
 const msgTemplate = document.querySelector('#msgTemplate').innerHTML
 const locationMsgTemplate = document.querySelector('#locationMsgTemplate').innerHTML
 
-const {username, room} = qs.parse(location.search, { ignoreQueryPrefix: true })
+const {username, room} = Qs.parse(location.search, { ignoreQueryPrefix: true })
 
 socket.on('message', (msg) => {
     console.log(msg)
