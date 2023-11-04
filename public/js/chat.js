@@ -12,7 +12,7 @@ const msgTemplate = document.querySelector('#msgTemplate').innerHTML
 const locationMsgTemplate = document.querySelector('#locationMsgTemplate').innerHTML
 const sidebarTemplate = document.querySelector('#sidebarTemplate').innerHTML
 
-const {username, room} = Qs.parse(location.search, { ignoreQueryPrefix: true })
+const { username, room } = Qs.parse(location.search, { ignoreQueryPrefix: true })
 
 const autoscroll = () => {
     // New Message Element
@@ -67,7 +67,7 @@ socket.on('roomData', ({ room, users }) => {
     document.querySelector('#sidebar').innerHTML = html
 })
 
-document.querySelector('#msgForm').addEventListener('submit', (e) => {
+$msgForm.addEventListener('submit', (e) => {
     e.preventDefault()
 
     // Disable Form
@@ -76,7 +76,7 @@ document.querySelector('#msgForm').addEventListener('submit', (e) => {
     console.log('Sent Message')
 
     // Getting message from html form
-    const msg = e.target.elements.msgContent
+    const msg = e.target.elements.msgContent.value
     socket.emit('sendMessage', msg, (error) => {
         // Reenable Form
         $msgFormButton.removeAttribute('disabled')
