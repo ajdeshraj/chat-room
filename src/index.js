@@ -41,6 +41,7 @@ io.on('connection', (socket) => {
         const user = getUser(socket.id)
         const filter = new Filter()
         if (filter.isProfane(msg)) {
+            socket.emit('message', generateMessage('Admin', 'Profanity is not Allowed!'))
             return callback('Profanity is not Allowed!')
         }
 
