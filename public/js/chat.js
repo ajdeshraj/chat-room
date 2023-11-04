@@ -112,7 +112,7 @@ document.querySelector('#sendLocation').addEventListener('click', () => {
 })
 
 socket.emit('join', {username, room}, (error) => {
-    if (errror) {
+    if (error) {
         alert(error)
         location.href='/'
     }
